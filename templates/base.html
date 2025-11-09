@@ -1,0 +1,28 @@
+    <!DOCTYPE html>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Site Médical</title>
+    
+</head>
+<body>
+    <h1>Bienvenue sur le site médical</h1>
+    {% block content %}
+    {% endblock %}
+    <nav>
+    {% if user.is_authenticated %}
+        <p>Bonjour, {{ user.username }} !</p>
+        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Se déconnecter</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Se connecter</a>
+        <a href="{% url 'register' %}">S’inscrire</a>
+    {% endif %}
+    </nav>
+    <hr>
+</body>
+</html>
