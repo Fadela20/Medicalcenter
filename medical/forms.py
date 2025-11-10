@@ -4,4 +4,4 @@ from .models import Patient
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = '__all__'
+        fields = ['nom','prenom','date_naissance','telephone','adresse']

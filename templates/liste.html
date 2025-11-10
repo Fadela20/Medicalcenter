@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<h2> Liste des patients</h2>
+<form method='get'>
+    <input type="text" name="g" placeholder="Rechercher un patient ..." value="{{request.GET.q}}" >
+    <button type="submit" >R echercher</button>
+</form>
+<a href="{% url 'ajouter_patient' %}">Ajouter un patient</a>
+
+<ul>
+    {%for patient in patients%}
+        <li>
+            {{patient.nom}}{{patient.prenom}}
+            (<a herf="{% url 'modifier_patient'patient.pk %}">Modifier</a>|
+            <a herf="{% url 'supprimer_patient'patient.pk %}">Supprimer</a>)
+        </li>
+    {%empty%}
+        <li>Aucun patient trouvé. </li>
+    {%endfor%}
+</ul>

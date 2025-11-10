@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>Dashboard</h1>
+<p><strong>Total de patients:</strong>{{total_patients}}</p>
+<h2>Derniers patients ajoutés</h2>
+<ul>
+    {%for patient in derniers_patients%}
+        <li>{{patient.nom}}{{patient.prenom}}-Ajouté le {{patient.date_enregistrement|date:"d/m/Y H:i"}}</li>
+    {%empty%}
+    <li>Aucun patient enregistré.</li>
+    {% endfor %}
+</ul>
+<a href="{%url 'liste_patients'%}">Voir la liste complète </a>
+{% endblock  %}

@@ -1,0 +1,7 @@
+<h2>Modifier le patient :{{patient.nom}} {{patient.prenom}}</h2>
+<from method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+    <button type="submit">Mettre à jour</button>
+</form>
+<a herf="{%url 'liste_patients'%}">Annuler</a>
