@@ -1,15 +1,59 @@
 {% extends "base.html" %}
-{% load static %}
+
 {% block content %}
-<h1>Dashboard</h1>
-<p><strong>Total de patients:</strong>{{total_patients}}</p>
-<h2>Derniers patients ajoutés</h2>
-<ul>
-    {%for patient in derniers_patients%}
-        <li>{{patient.nom}}{{patient.prenom}}-Ajouté le {{patient.date_enregistrement|date:"d/m/Y H:i"}}</li>
-    {%empty%}
-    <li>Aucun patient enregistré.</li>
-    {% endfor %}
-</ul>
-<a href="{%url 'liste_patients'%}">Voir la liste complète </a>
-{% endblock  %}
+<div class="container mt-4">
+
+    <h2 class="mb-4">Dashboard</h2>
+    <hr>
+
+    
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary shadow-sm mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total de patients</h5>
+                    <p class="card-text display-6">{{ total_patients }}</p>
+                    <a href="{% url 'liste_patients' %}" class="btn btn-light btn-sm">Voir la liste</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-white bg-success shadow-sm mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Documents médicaux</h5>
+                    <p class="card-text display-6">{{ total_documents }}</p>
+                    <a href="{% url 'liste_documents' %}" class="btn btn-light btn-sm">Voir les documents</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-white bg-info shadow-sm mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Rendez-vous</h5>
+                    <p class="card-text display-6">{{ total_rendez_vous }}</p>
+                    <a href="{% url 'liste_rendez_vous' %}" class="btn btn-light btn-sm">Voir les rendez-vous</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <h3 class="mb-3">Derniers patients ajoutés</h3>
+    <ul class="list-group mb-3">
+        {% for patient in derniers_patients %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ patient.nom }} {{ patient.prenom }} - Ajouté le {{ patient.date_enregistrement|date:"d/m/Y H:i" }}
+                <a href="{% url 'detail_patient' patient.id %}" class="btn btn-primary btn-sm">Voir</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">Aucun patient enregistré.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'liste_patients' %}" class="btn btn-secondary">Voir la liste complète des patients</a>
+
+</div>
+{% endblock %}
+

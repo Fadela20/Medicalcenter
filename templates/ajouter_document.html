@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class='container mt-4'>
+    <h2>Ajouter un document médical pour: {{ patient.nom }} {{ patient.prenom }}</h2>
+    <hr>
+
+    <form method="post" enctype="multipart/form-data" class="mt-3">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="from-label">Titre du document</label>
+            {{ form.titre }}
+        </div>
+        
+        <div class="mb-3">
+            <label class="from-label">Description</label>
+            {{ form.description }}
+        </div>
+
+        <div class="mb-3">
+            <label class="from-label">Fichier</label>
+            {{ form.fichier }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <a href="{% url 'liste_patients' %}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}
